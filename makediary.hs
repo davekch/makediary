@@ -60,5 +60,5 @@ getDiaryFiles rootdir = do
   years <- getYearDirs rootdir
   files <- mapM listDirectory years
   -- return tuple of folder and filename
-  let paths = zipWith (\y f -> (y,concat f)) years files
-  return $ filter ((".tex" `isSuffixOf`) . snd) paths
+  let paths = zipWith (\y f -> (map (\x -> (y,x)) f)) years files
+  return . filter ((".tex" `isSuffixOf`) . snd) . concat $ paths

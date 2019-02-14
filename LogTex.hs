@@ -12,7 +12,7 @@ createEntry :: Style -> (String, String) -> String
 createEntry style (dir, filename) =
   "%" ++ show (nameToDate filename) ++ "\n"
   ++ "\\begin{loggentry}{" ++ dateStr ++ "}\n"
-  ++ "  \\input{" ++ dir ++ "/" ++ filename ++ "}\n"
+  ++ "  \\input{" ++ dir ++ "}\n"
   ++ "\\end{loggentry}\n\n"
   where
     dateStr = prettyPrint style $ nameToDate filename

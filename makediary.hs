@@ -15,9 +15,11 @@ main = do
 
 
 updateTexFile :: [String] -> IO ()
-updateTexFile [texfile, dir] = do
+updateTexFile [template, texfile, dir] = do
   filelist <- getTexFilesList dir
-  let datelist = [(nameToDate name, createEntry DDMMYYYY (path, name)) | (File name path) <- filelist]
+  templ <- readFile template
+  let entry = unlines . createEntry (lines templ)
+      datelist = [(nameToDate name, entry (path, name)) | (File name path) <- filelist]
   writeTex texfile datelist
 
 writeTex :: String -> [(Date,String)] -> IO ()

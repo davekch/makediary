@@ -9,7 +9,7 @@ texFilesTree path = do
     _:/tree <- readDirectoryWith return path
     return $ filterDir findTex tree
   where findTex (Dir ('.':_) _) = False
-        findTex (File n _) = takeExtension n == ".tex"
+        findTex (File ('.':_) _) = False
         findTex _ = True
 
 texFilesList :: DirTree FilePath -> [DirTree FilePath]
